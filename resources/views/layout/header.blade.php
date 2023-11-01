@@ -8,7 +8,12 @@
 
     <ul class="nav nav-pills">
         @php
-            $menu = [['url' => '/', 'name' => 'Home'], ['url' => 'mahasiswa', 'name' => 'Mahasiswa'], ['url' => 'mk', 'name' => 'MK'], ['url' => 'kelas', 'name' => 'Kelas']];
+            $menu = [
+                ['url' => '/',          'name' => 'Home'], 
+                ['url' => 'mahasiswa',  'name' => 'Mahasiswa'],
+                ['url' => 'mk',         'name' => 'MK'], 
+                ['url' => 'kelas',      'name' => 'Kelas']
+            ];
         @endphp
 
         @foreach ($menu as $m)
