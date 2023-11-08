@@ -19,7 +19,9 @@ class MahasiswaController extends Controller
 
     public function create()
     {
-        return view('mahasiswa.create');
+        $jurusan = DB::table('jurusan')->get();
+
+        return view('mahasiswa.create', ['jurusan' => $jurusan]);
     }
 
     public function edit($id)
