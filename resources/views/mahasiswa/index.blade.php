@@ -33,7 +33,7 @@
                         <tr>
                             <td>{{ $d->nim }}</td>
                             <td>{{ $d->nama }}</td>
-                            <td>{{ $d->jurusan_nama }}</td>
+                            <td>{{ $d->jurusan->nama }}</td>
                             <td class="float-end">
                                 <a class="btn btn-sm btn-warning"
                                     href="{{ url('/mahasiswa/' . $d->id . '/edit') }}">Ubah</a>

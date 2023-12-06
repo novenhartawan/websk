@@ -18,20 +18,29 @@
             <div class="card-body">
                 @csrf
                 <div>
-                    <label class="form-label">NIM</label>
-                    <input class="form-control" type="text" name="nim">
+                    <label class="form-label @error('nim') text-danger @enderror">NIM</label>
+                    <input class="form-control @error('nim') is-invalid @enderror" type="text" name="nim" value="{{ old('nim') }}">
+                    @error('nim')
+                        <div class="invalid-feedback mb-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
-                    <label class="form-label">Nama</label>
-                    <input class="form-control" type="text" name="nama">
+                    <label class="form-label @error('nama') text-danger @enderror">Nama</label>
+                    <input class="form-control @error('nama') is-invalid @enderror" type="text" name="nama" value="{{ old('nama') }}">
+                    @error('nama')
+                        <div class="invalid-feedback mb-2">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div>
-                    <label class="form-label">Jurusan</label>
-                    <select class="form-select" name="jurusan">
+                    <label class="form-label @error('jurusan') text-danger @enderror">Jurusan</label>
+                    <select class="form-select @error('jurusan') is-invalid @enderror" name="jurusan">
                         @foreach ($jurusan as $j)
-                            <option value="{{ $j->id }}">{{ $j->nama }}</option>
+                            <option value="{{ $j->id }}" {{old('jurusan') == $j->id ? 'selected' : '' }}>{{ $j->nama }}</option>
                         @endforeach
                     </select>
+                    @error('jurusan')
+                        <div class="invalid-feedback mb-2">{{ $message }}</div>
+                    @enderror
                 </div>
 
             </div>

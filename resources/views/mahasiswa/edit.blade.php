@@ -14,7 +14,7 @@
                 <h4 class="card-title">Form Ubah Mahasiswa</h4>
             </div>
         </div>
-        <form action="{{ url('/mahasiswa/' . $id) }}" method="POST">
+        <form action="{{ url('/mahasiswa/' . $mhs->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="card-body">
