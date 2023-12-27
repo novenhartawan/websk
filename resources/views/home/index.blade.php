@@ -7,5 +7,10 @@
 @endsection
 
 @section('content')
-    <h2>Selamat Datang Dion</h2>
+    @if (Auth::check())
+        
+    <h2>Selamat Datang {{ Auth::user()->email }}</h2>
+    @else
+    <h2>Anda Belum login</h2>
+    @endif
 @endsection

@@ -4,6 +4,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MKController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,28 +19,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'authenticate']);
+
 Route::get('/', [HomeController::class, 'index']);
+Route::middleware(['auth'])->group(function () {
 
-Route::controller(MahasiswaController::class)->prefix("mahasiswa")->group(function () {
-    Route::get('/', 'index');
-    Route::post('/', 'store');
-    Route::get('/create', 'create');
-    Route::get('/{mhs}', 'show');
-    Route::put('/{mhs}', 'update');
-    Route::delete('/{mhs}', 'destroy');
-    Route::get('/{mhs}/edit', 'edit');
+    Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+    
+    Route::controller(MahasiswaController::class)->prefix("mahasiswa")->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store')->middleware('can:tambah-mhs');
+        Route::get('/create', 'create')->middleware('can:tambah-mhs');
+        Route::get('/{mhs}', 'show');
+        Route::put('/{mhs}', 'update');
+        Route::delete('/{mhs}', 'destroy');
+        Route::get('/{mhs}/edit', 'edit');
+    });
+    
+    Route::controller(MKController::class)->prefix("mk")->group(function () {
+        Route::get('/', 'index');
+        Route::get('/create', 'create');
+        Route::get('/{id}', 'show');
+        Route::get('/{id}/edit', 'edit');
+    });
+    
+    Route::controller(KelasController::class)->prefix("kelas")->group(function () {
+        Route::get('/', 'index');
+        Route::get('/create', 'create');
+        Route::get('/{id}', 'show');
+        Route::get('/{id}/edit', 'edit');
+    });
 });
 
-Route::controller(MKController::class)->prefix("mk")->group(function () {
-    Route::get('/', 'index');
-    Route::get('/create', 'create');
-    Route::get('/{id}', 'show');
-    Route::get('/{id}/edit', 'edit');
-});
 
-Route::controller(KelasController::class)->prefix("kelas")->group(function () {
-    Route::get('/', 'index');
-    Route::get('/create', 'create');
-    Route::get('/{id}', 'show');
-    Route::get('/{id}/edit', 'edit');
-});

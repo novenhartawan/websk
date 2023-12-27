@@ -14,7 +14,9 @@
                     <h4 class="card-title">Tabel Data Mahasiswa</h4>
                 </div>
                 <div class="col-2">
-                    <a class="btn btn-sm btn-primary float-end" href="{{ url('/mahasiswa/create') }}">Tambah</a>
+                    @can('tambah-mhs')
+                        <a class="btn btn-sm btn-primary float-end" href="{{ url('/mahasiswa/create') }}">Tambah</a>
+                    @endcan
                 </div>
             </div>
         </div>

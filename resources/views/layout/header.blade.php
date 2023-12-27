@@ -19,5 +19,18 @@
         @foreach ($menu as $m)
             @include('layout.nav-item', ['menu' => $m])
         @endforeach
+
+        @if (Auth::check())
+            
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="fa fa-fw fa-power-off"></i> Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf @method('POST')
+            </form>
+        </li>
+        @endif
+    
     </ul>
 </header>
